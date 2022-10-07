@@ -10,6 +10,7 @@ nums.pop();
 
 console.log(nums);
 
+
 /*
 # 문제2 : 배열의 내장함수
 <pass>부분에 배열 내장함수를 이용하여 코드를 입력하고 다음과 같이 출력되게 하세요.
@@ -24,6 +25,7 @@ arr.splice(2, 0, 10000);
 
 console.log(arr);
 
+
 /*
 # 문제3 : 변수의 타입
 다음 출력 값으로 올바른 것은?
@@ -37,6 +39,7 @@ console.log(typeof(arr));
 
 // 4. object
 
+
 /*
 # 문제4 : 변수의 타입2
 다음 변수 a를 `typeof(a)`로 넣었을 때 출력될 값과의 연결이 알맞지 않은 것은?
@@ -48,6 +51,7 @@ console.log(typeof(arr));
 */
 
 // 2)  입력 : a = 2.22,   출력 : boolean
+
 
 /*
 # 문제5 : for문 계산
@@ -68,6 +72,7 @@ console.log(a+b); // 14 + 2
 
 //4. 16
 
+
 /*
 # 문제6 : False
 다음은 자바스크립트 문법 중에서 False로 취급하는 것들 입니다.
@@ -82,6 +87,7 @@ console.log(a+b); // 14 + 2
 
 // 2)  1
 
+
 /*
 # 문제7 : 변수명
 다음 중 변수명으로 사용할 수 없는 것 2개를 고르시오.
@@ -93,6 +99,7 @@ console.log(a+b); // 14 + 2
 */
 
 // 3)  let 5)  1age
+
 
 /*
 # 문제8 : 객체의 키 이름 중복
@@ -109,6 +116,7 @@ var d = {
 };
 
 console.log(d['weight']); // 84 키 중복일경우 마지막 값을 가져옴
+
 
 /*
 # 문제9 : concat을 활용한 출력 방법
@@ -129,3 +137,37 @@ var second = '27';
 var result = year.concat('/', month, '/', day,' ', hour,':',minute,':',second);
 
 console.log(result);
+
+
+/*
+# 문제10 : 별 찍기
+크리스마스 날, 은비는 친구들과 함께 파티를 하기로 했습니다. 그런데, 크리스마스 트리를 사는 것을 깜빡하고 말았습니다. 온 가게를 돌아다녀 봤지만 크리스마스 트리는 모두 품절이었습니다. 
+하는 수 없이 은비는 프로그래밍으로 트리를 만들기로 합니다.
+
+입력
+5
+
+출력
+    *
+   ***
+  *****
+ *******
+*********
+*/
+
+let starTree ='';
+let height = 5;
+
+for (let i = 1; i <= height; i++){
+    let star = '';
+    for (let j =1; j <= height-i; j++){
+        star += ' ';   //공백 누적
+    }
+    for (let k = 1; k <= 2*i -1; k++){
+        star += '*'    //*누적
+    }
+    // 순회 돌 때마다 개행
+    starTree += star + '\n';
+}
+
+console.log(starTree);
