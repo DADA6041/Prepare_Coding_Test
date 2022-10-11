@@ -342,4 +342,25 @@ for (let i = 0; i < 3; i++){
 console.log(Math.floor(sum/3)); // 소숫점자리 버림
 
 
+/*
+# 문제19 : 제곱을 구하자
+공백으로 구분하여 두 숫자 a와 b가 주어지면, **a의 b승**을 구하는 프로그램을 작성하세요.
+*/
 
+const square = prompt('두 숫자를 입력하세요.').split(' ');
+
+console.log(Math.pow(parseInt(square[0]), parseInt(square[1])));
+
+
+/*
+# 문제20 : 몫과 나머지
+
+공백으로 구분하여 두 숫자가 주어집니다.
+두번째 숫자로 첫번째 숫자를 나누었을 때 **그 몫과 나머지를 공백으로 구분하여 출력하세요.**
+*/
+const getNumber = prompt('두 숫자를 입력하세요.').split(' ');
+
+const apart = Math.floor(parseInt(getNumber[0]) / parseInt(getNumber[1]));
+const left = parseInt(getNumber[0]) % parseInt(getNumber[1]);
+
+console.log(apart, left);
