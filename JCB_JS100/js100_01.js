@@ -691,3 +691,39 @@ for (let i = 1; i < 10; i++){
 }
 console.log(multip);
 
+// ----------------------------------------------------------
+
+/*
+# 문제37 : 반장 선거
+새 학기를 맞아 호준이네 반은 반장 선거를 하기로 했습니다.  그런데 표를 하나씩 개표하는 과정이 너무 번거롭게 느껴진 당신은 **학생들이 뽑은 후보들을 입력받으면 뽑힌 학생의 이름과 받은 표 수를 출력하는 프로그램**을 작성하기로 하였습니다.
+
+입력
+원범 원범 혜원 혜원 혜원 혜원 유진 유진
+출력
+혜원(이)가 총 4표로 반장이 되었습니다.
+*/
+
+const vote = prompt('이름을 입력해 주세요').split(' ');
+
+let voteResult = {}; 
+
+for (let i = 0; i < vote.length; i++){
+    if(voteResult[vote[i]]) {
+        voteResult[vote[i]] ++;
+    } else {
+        voteResult[vote[i]] = 1;
+    }
+}
+// console.log(voteResult);
+
+const voteMax = Math.max(...(Object.values(voteResult)));
+
+let elected = '';
+
+for (let i in voteResult) {
+    if(voteResult[i] === voteMax){
+        elected = i;
+    }
+}
+// console.log(elected)
+console.log(`${elected}(이)가 총 ${voteMax}표로 반장이 되었습니다.`)
