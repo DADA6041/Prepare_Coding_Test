@@ -919,3 +919,24 @@ let date = new Date();
 let nowYear = Math.floor(date.getTime()/(3600*24*365*1000)) + 1970;
 
 console.log(nowYear);
+
+// ----------------------------------------------------------
+
+/*
+# 문제46 : 각 자리수의 합 2
+1부터 20까지의(20을 포함) 모든 숫자를 일렬로 놓고 모든 자릿수의 총 합을 구하세요. 
+
+예를 들어 10부터 15까지의 모든 숫자를 일렬로 놓으면 101112131415이고 
+각 자리의 숫자를 더하면 21입니다. (1+0+1+1+1+2+1+3+1+4+1+5 = 21)
+*/
+
+const arrSum = prompt('두 수를 띄어쓰기 하여 입력해주세요').split(' ');
+
+let temp = [];
+for (let i = arrSum[0]; i <= arrSum[1]; i++){
+    temp.push(parseInt(i));
+}
+
+let sepNum = temp.join('').split('')
+
+sepNum.reduce((a,b) => parseInt(a) + parseInt(b));
