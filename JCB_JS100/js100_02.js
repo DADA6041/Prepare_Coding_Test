@@ -131,3 +131,33 @@ function stampPick(sortArr){
 }
 console.log(stampPick(stamp))
 
+// ----------------------------------------------------------
+
+/*
+# 문제55 : 하노이의 탑
+하노이의 탑은 프랑스 수학자 에두아르드가 처음으로 발표한 게임입니다.
+모든 원반을 옮기기 위해 실행되어야 할 최소 원반 이동 횟수를 계산하는 프로그램을 완성해 주세요.
+*/
+
+const route = []; //순회 경로
+
+function hanoi(num, start, end, temp) {
+    //원판이 한 개일 때에는 바로 옮기면 됩니다.
+    if (num === 1) {
+        route.push([start, end]);
+        return NaN;
+    }
+
+    //원반이 n-1개를 경유기둥으로 옮기고
+    hanoi(num - 1, start, end, temp);
+    //가장 큰 원반은 목표기둥으로
+    route.push([start, end]);
+    //경유기둥과 시작기둥을 바꿉니다.
+    hanoi(num-1, temp, end, start);
+}
+
+hanoi(3, 'A', 'B', 'C');
+console.log(route);
+console.log(route.length);
+
+// ----------------------------------------------------------
