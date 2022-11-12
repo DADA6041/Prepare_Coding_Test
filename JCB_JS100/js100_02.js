@@ -216,3 +216,34 @@ let thousandArr = new Array(1001)
 console.log(thousandArr.length);
 
 // ----------------------------------------------------------
+
+/*
+# 문제58 : 콤마 찍기
+원범이는 편의점 아르바이트가 끝난 후 정산을 하고자 합니다.
+정산을 빨리하고 집에 가고 싶은 원범이는 프로그램을 만들려고 합니다.
+
+**숫자를 입력받고 천 단위로 콤마(,)를 찍어주세요.**
+예를 들어, **123456789**를 입력받았으면 **123,456,789**를 출력해야 합니다.
+*/
+
+const commaInp = prompt('숫자를 입력해 주세요');
+
+// 1번
+let commaNum1 = new Intl.NumberFormat().format(parseInt(commaInp));
+console.log(commaNum1);
+
+// 2번
+console.log(parseInt(commaInp).toLocaleString());
+
+// 3번 
+let commaNum2 = '';
+
+for (let i = 0; i < commaInp.length; i++){
+    if((commaInp.length - i) % 3 === 0 && i !== 0){
+        commaNum2 += ','
+    }
+    commaNum2 += commaInp[i];
+}
+console.log(commaNum2);
+
+// ----------------------------------------------------------
