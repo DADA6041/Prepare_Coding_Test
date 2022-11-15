@@ -294,3 +294,31 @@ let newStuArr = students
                     .map((i, index) => {
                         console.log(`번호: ${index}, 이름: ${i}`);
                     })
+
+// ----------------------------------------------------------
+
+/*
+# 문제61 : 문자열 압축하기
+문자열을 입력받고 연속되는 문자열을 압축해서 표현하고 싶습니다.
+
+입력
+aaabbbbcdddd
+
+출력
+a3b4c1d4
+*/
+
+const continuedStr =  prompt('연속된 문자열을 입력해 주세요') /*'aaabbbbcdddd'*/;
+
+let strCount = 1;
+let strOutput = '';
+
+for(let i = 0; i < continuedStr.length; i++){
+    if(continuedStr[i] === continuedStr[i + 1]){
+        strCount++;
+    } else if(continuedStr[i] !== continuedStr[i + 1]){
+        strOutput += (continuedStr[i] + strCount);
+        strCount = 1;
+    }
+}
+console.log(strOutput);
