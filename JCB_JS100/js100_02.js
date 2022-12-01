@@ -786,3 +786,74 @@ console.log(shortPath());
 
 // ----------------------------------------------------------
 
+/*
+# 문제74 : 최장 경로 찾기
+다음과 같이 노드의 연결 관계가 주어집니다. 
+입력으로는 경로를 구할 두 정점의 번호가 공백으로 구분되어 주어집니다. 
+우리는 **이 두 정점으로 가기 위한 최대 거리**를 구하고자 합니다. 
+최대 거리란, 정점의 중복 없이 한 정점에서 다른 정점까지 경유할 수 있는 가장 많은 간선의 수를 뜻합니다.
+
+데이터
+graph = {1: [2, 3, 4],
+				2: [1, 3, 4, 5, 6],
+				3: [1, 2, 7],
+				4: [1, 2, 5, 6],
+				5: [2, 4, 6, 7],
+				6: [2, 4, 5, 7],
+				7: [3, 5, 6]}
+
+
+입력
+1 7
+
+출력
+6
+*/
+pathLong = {1: [2, 3, 4],
+    2: [1, 3, 4, 5, 6],
+    3: [1, 2, 7],
+    4: [1, 2, 5, 6],
+    5: [2, 4, 6, 7],
+    6: [2, 4, 5, 7],
+    7: [3, 5, 6]}
+
+
+const userInputLong = prompt('입력해 주세요').split(' ');
+
+const startNodeLong = parseInt(userInputLong[0], 10);
+const endNodeLong = parseInt(userInputLong[1], 10);
+
+
+let queueL = [startNodeLong];
+let visitedL = [];
+
+function longPath(n, visitedL){
+    let node = n[n.length -1];
+    let length = 0;
+
+    if(node == endNodeLong) {
+        return visitedL.length;
+    }
+
+    if(visitedL.includes(node)){
+        return visitedL.length;
+    } else{
+        visitedL.push(node);
+    }
+
+    let max = [];
+
+    for(let next_Node in pathLong[node]){
+        n.push(pathLong[node][next_Node]);
+        max.push(length, longPath(n, visitedL));
+        length = Math.max.apply(null, max);
+
+        queueL.pop();
+    }
+    return length;
+}
+
+console.log(longPath(queueL, visitedL));
+
+// ----------------------------------------------------------
+
