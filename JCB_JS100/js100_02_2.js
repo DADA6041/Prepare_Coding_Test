@@ -33,37 +33,97 @@ console.log(minesweeper);
 let count = 0;
 
 let flagSplit = "0 1 0 0 0\n0 0 0 0 0\n0 0 0 1 0\n0 0 1 0 0\n0 0 0 0 0".split('\n');
-for(let i of flagSplit) {
-  flagSplit[count] = i.replace('1', 'f').split(' ');
-  count += 1;
+for (let i of flagSplit) {
+    flagSplit[count] = i.replace('1', 'f').split(' ');
+    count += 1;
 }
 
 count = 0;
 let search = 0;
 
 for (let j of flagSplit) {
-  for (let k of j) {
-    if(k === 'f'){
-      if(search > 0) {
-        j[search - 1] = '*';
-      }
-      if(search < 4) {
-        j[search + 1] = '*';
-      }
-      if(count > 0) {
-        flagSplit[count - 1][search] = '*';
-      }
-      if(count < 4) {
-        flagSplit[count + 1][search] = '*';
-      }
+    for (let k of j) {
+        if (k === 'f') {
+            if (search > 0) {
+                j[search - 1] = '*';
+            }
+            if (search < 4) {
+                j[search + 1] = '*';
+            }
+            if (count > 0) {
+                flagSplit[count - 1][search] = '*';
+            }
+            if (count < 4) {
+                flagSplit[count + 1][search] = '*';
+            }
+        }
+        search++;
     }
-    search++;
-  }
-  count++;
-  search = 0;
+    count++;
+    search = 0;
 }
 
 console.log(flagSplit);
 
 // ----------------------------------------------------------
 
+/*
+# 문제82 : 수학 괄호 파싱
+수학공식이 제대로 입력이 되었는지 판단하는 코드를 작성하려 합니다. 괄호는 소괄호밖에 없습니다.
+
+데이터 입력(1), 프로그램 종료(2) : 1
+데이터를 입력하세요: 3 + 5
+True
+
+
+데이터 입력(1), 프로그램 종료(2) : 1
+데이터를 입력하세요: 5 + 7) * (3 * 5)
+False
+
+# 문제83 : 수학 괄호 파싱 2
+
+수학공식이 제대로 입력이 되었는지 판단하는 코드를 작성하려 합니다.
+괄호는 소괄호와 중괄호가 있습니다.
+
+데이터 입력(1), 프로그램 종료(2) : 1
+데이터를 입력하세요: 5 + 7 * {(3 * 5)}
+True
+
+데이터 입력(1), 프로그램 종료(2) : 1
+데이터를 입력하세요: 5 + 7){ * (3 * 5)
+False
+
+데이터 입력(1), 프로그램 종료(2) : 2
+*/
+
+let parenthInp = '5 + 7){ * (3 * 5)'
+
+function math(e) {
+
+    const m = {
+        ')': '(',
+        '}': '{'
+    }
+
+    let stack = [];
+
+    for (let i in e) {
+        if (e[i] === '(' || e[i] === '{') {
+            stack.push(e[i]);
+        } else if(m[e[i]]){
+            if(stack.length === 0){
+                return false;
+            } else {
+                let j = m[e[i]];
+                if(j !== stack.pop()){
+                    return false;
+                }
+            }
+        }
+    }
+    return stack.length === 0;
+}
+
+console.log(math(parenthInp));
+
+// ----------------------------------------------------------
