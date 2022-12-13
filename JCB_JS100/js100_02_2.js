@@ -110,12 +110,12 @@ function math(e) {
     for (let i in e) {
         if (e[i] === '(' || e[i] === '{') {
             stack.push(e[i]);
-        } else if(m[e[i]]){
-            if(stack.length === 0){
+        } else if (m[e[i]]) {
+            if (stack.length === 0) {
                 return false;
             } else {
                 let j = m[e[i]];
-                if(j !== stack.pop()){
+                if (j !== stack.pop()) {
                     return false;
                 }
             }
@@ -125,5 +125,38 @@ function math(e) {
 }
 
 console.log(math(parenthInp));
+
+// ----------------------------------------------------------
+
+/**
+# 문제84 : 숫자뽑기
+소정이는 어떤 숫자에서 k개의 수를 뽑았을 때 가장 큰 수를 찾는 놀이를 하고 있습니다. 
+예를 들어, 숫자 1723에서 두 개의 수를 뽑으면 [17, 12, 13, 72, 73, 23]을 만들 수 있습니다.
+이 중 가장 큰 수는 **73**입니다.
+
+위 예시처럼 **어떤 수 n에서 k개의 수를 선택하여 만들 수 있는 수 중에서 가장 큰 수**를 찾아 주세요.
+*/
+
+function selectNum(arrNum, selNum) {
+    let allNum = [];
+
+    const func = (pre, arrNum) => {
+        for (let i = 0; i < arrNum.length; i++) {
+            allNum.push(pre + arrNum[i]);
+            func(pre + arrNum[i], arrNum.slice(i + 1));
+        }
+    }
+    func('', arrNum);
+
+    const result = allNum.filter(i => i.length === selNum)
+                        .sort((a, b) => b - a);
+    console.log(result[0]);
+    return result;
+}
+
+const arrNum = '1723'.split('');
+const selNum = 2;
+
+selectNum(arrNum, selNum);
 
 // ----------------------------------------------------------
