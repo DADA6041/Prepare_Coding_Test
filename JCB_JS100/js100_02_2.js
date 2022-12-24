@@ -268,18 +268,18 @@ function sushiPlate(sushiPoint, sushiDish) {
     let s = sushiPoint.map(i => i);
     s.sort((a, b) => a - b);
 
-    while(true){
+    while (true) {
         let p = sushiPoint.shift();
 
-        if(s[0] === p){
-            if(sushiDish === 0) {
+        if (s[0] === p) {
+            if (sushiDish === 0) {
                 break;
             }
             sushiDish -= 1;
             s.shift();
         } else {
             sushiPoint.push(p);
-            if(sushiDish === 0) {
+            if (sushiDish === 0) {
                 sushiDish = sushiPoint.length - 1;
             } else {
                 sushiDish -= 1;
@@ -316,21 +316,21 @@ console.log(sushiPlate(sushiPoint, sushiDish));
 const inpName = "손오공 야모챠 메지터 비콜로".split(" ");
 const inpPlate = "70 10 55 40".split(" ").map(i => parseInt(i));
 
-function eatCont(name, plate){
+function eatCont(name, plate) {
     let rankSort = plate.map(i => i).sort((a, b) => b - a);
     let rank = plate.map(j => rankSort.findIndex((item) => item === j) + 1);
 
     let temp = [];
-    
-    for (let i = 0; i < name.length; i++){
-        let obj ={};
+
+    for (let i = 0; i < name.length; i++) {
+        let obj = {};
         obj['name'] = name[i];
         obj['value'] = rank[i];
         temp.push(obj);
     }
     let tempSort = temp.sort((a, b) => a.value - b.value);
     let result = {};
-    for(i of tempSort){
+    for (i of tempSort) {
         result[i['name']] = i.value;
     }
     return result;
@@ -424,60 +424,127 @@ console.log('캐릭터 이동 후 지도')
 캐릭터위치 : [4, 4]
 */
 
-function make_map(row, col, char, block, move){
-  let world_map = [];
-  for (let i = 0; i < col + 2; i++){
-      world_map.push(Array(row + 2).fill(0));
-  }
-  
-  for(let i in world_map){
-      for(let j in world_map[i]){
-          if(i == 0 || j == 0 || world_map[0].length - 1 == j || world_map.length - 1 == i){
-              world_map[i][j] = 2;
-          }
-      }
-  }
-
-  world_map[char[0] + 1][char[1] + 1] = 1;
-
-  for(let i of block){
-      if(world_map[i[0] + 1][i[1] + 1] == 1){
-          world_map[i[0] + 1][i[1] + 1] = 1;
-      }else {
-          world_map[i[0] + 1][i[1] + 1] = 2;
-      }
-  }
-  console.log(world_map);
-
-  let location = [char[0] + 1, char[1] + 1];
-  let x = location[1];
-  let y = location[0];
-
-  world_map[y][x] = 0;
-
-  for(let i of move){
-    if(i === 1 && world_map[y - 1][x] != 2){
-      y -= 1;
-    } else if (i === 2 && world_map[y + 1][x] != 2){
-      y += 1;
-    } else if(i === 3 && world_map[x - 1][x] != 2){
-      x -= 1;
-    }else if (i === 4 && world_map[x + 1][x] != 2){
-      x += 1;
+function make_map(row, col, char, block, move) {
+    let world_map = [];
+    for (let i = 0; i < col + 2; i++) {
+        world_map.push(Array(row + 2).fill(0));
     }
-  }
 
-  world_map[y][x] = 1;
-  console.log(world_map);
-  console.log(`캐릭터의 위치 : ${[x, y]}`);
+    for (let i in world_map) {
+        for (let j in world_map[i]) {
+            if (i == 0 || j == 0 || world_map[0].length - 1 == j || world_map.length - 1 == i) {
+                world_map[i][j] = 2;
+            }
+        }
+    }
+
+    world_map[char[0] + 1][char[1] + 1] = 1;
+
+    for (let i of block) {
+        if (world_map[i[0] + 1][i[1] + 1] == 1) {
+            world_map[i[0] + 1][i[1] + 1] = 1;
+        } else {
+            world_map[i[0] + 1][i[1] + 1] = 2;
+        }
+    }
+    console.log(world_map);
+
+    let location = [char[0] + 1, char[1] + 1];
+    let x = location[1];
+    let y = location[0];
+
+    world_map[y][x] = 0;
+
+    for (let i of move) {
+        if (i === 1 && world_map[y - 1][x] != 2) {
+            y -= 1;
+        } else if (i === 2 && world_map[y + 1][x] != 2) {
+            y += 1;
+        } else if (i === 3 && world_map[x - 1][x] != 2) {
+            x -= 1;
+        } else if (i === 4 && world_map[x + 1][x] != 2) {
+            x += 1;
+        }
+    }
+
+    world_map[y][x] = 1;
+    console.log(world_map);
+    console.log(`캐릭터의 위치 : ${[x, y]}`);
 };
 
 const row = 4;
 const col = 5;
-const char = [0,0];
-const block = [[0,1],[1,1],[2,3],[1,3]];
-const move = [2,2,2,4,4,4];
+const char = [0, 0];
+const block = [[0, 1], [1, 1], [2, 3], [1, 3]];
+const move = [2, 2, 2, 4, 4, 4];
 
 make_map(row, col, char, block, move);
+
+// ----------------------------------------------------------
+
+/*
+# 문제 90 : 같은 의약 성분을 찾아라!
+
+의약품 성분이 총 8개인 약품들이 있습니다. 예를 들어 다음 데이터는 총 8개의 성분을 갖습니다.
+
+판콜비 = 'ABCDEFGH'
+넥타이레놀 = 'EFGHIJKL'
+
+특정 약품 A의 성분이 공개되었을 때, 이와 유사한 성분을 가진 데이터들의 출력을 구하는 문제입니다.
+
+입력 : 'ABCDEFGH' 4
+데이터 : 'EFGHIJKL', 'EFGHIJKM', 'EFGHIJKZ' 등 1만 개의 데이터
+출력 : 'EFGHIJKL', 'EFGHIJKM', 'EFGHIJKZ' 등 4개의 요소가 같은 약품 전부(4개 이상이 아니며 같은 요소가 4개인 것을 출력해야 합니다.)
+
+* 해당 문제는 시간제한이 있습니다.
+* 제약 데이터의 성분은 중복이 될 수 없습니다.
+(예를 들어 'AAABBBAB'와 같은 데이터는 없습니다.)
+*/
+
+let tempL = [];
+
+for (let i = 65; i < 91; i++) {
+    tempL.push(String.fromCharCode(i));
+}
+
+function randomLetter(letter) {
+    let string = [];
+
+    while (string.length !== 8) {
+        let a = letter[Math.floor(Math.random() * letter.length)];
+        if (!string.includes(a)) {
+            string.push(a);
+        }
+    }
+
+    let medicine = string.join('');
+    return medicine;
+}
+
+let totalMedicine = [];
+
+while (totalMedicine.length !== 100) {
+    let medi = randomLetter(tempL);
+    if (!totalMedicine.includes(medi)) {
+        totalMedicine.push(medi);
+    }
+}
+
+console.log(totalMedicine);
+
+const userInpIsMatch = 'ABCDEFGH 4'.split(' ');
+let matchResult = [];
+
+for (let i of totalMedicine) {
+    let setUserData = new Set(userInpIsMatch[0]);
+    let setMedi = new Set(i);
+
+    let intersection = new Set([...setUserData].filter(i => setMedi.has(i)));
+    if (intersection.size === parseInt(userInpIsMatch[1])) {
+        matchResult.push(i);
+    }
+}
+console.log(matchResult);
+console.log(matchResult.length);
 
 // ----------------------------------------------------------
