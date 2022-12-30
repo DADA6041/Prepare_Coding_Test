@@ -548,3 +548,55 @@ console.log(matchResult);
 console.log(matchResult.length);
 
 // ----------------------------------------------------------
+
+/*
+# 문제 91 : 반평균 등수
+
+한 반에 30명인 학생, 총 7개의 반 점수가 '국어, 영어, 수학, 사회, 과학' 순서로 있는 다중 리스트를 랜덤 한 값으로 만들어주시고 아래 값을 모두 출력하세요.
+
+1. 반 점수 모두가 담긴 전교 점수 다중 리스트를 만들어주세요.
+2. 반 평균을 구하세요.
+3. 반 1등 점수를 구하세요.
+4. 전교 평균을 구하세요.
+
+(출력 형식은 상관없습니다.)
+*/
+
+let student_score = [];
+let class_score = [];
+let total_score = [];
+
+for (let k = 0; k < 7; k++) {
+    class_score = [];
+    for (let j = 0; j < 30; j++) {
+        student_score = [];
+        for (let i = 0; i < 5; i++) {
+            student_score.push(Math.floor(Math.random() * 100) + 1);
+        }
+        class_score.push(student_score);
+    }
+    total_score.push(class_score);
+}
+
+console.log(total_score); // 1. 반 점수 모두가 담긴 전교 점수 다중 리스트
+
+let totalAvg = [];
+let classAvg = [];
+let studentAvg = 0;
+let studentSum = 0;
+
+for (let t of total_score) {
+    classAvg = [];
+    for (let c of t) {
+        studentSum = c.reduce((a, b) => a + b);
+        studentAvg = studentSum / 5;
+        classAvg.push(studentAvg);
+    }
+    totalAvg.push(parseInt(classAvg.reduce((a, b) => a + b) / 30));
+    console.log(classAvg);
+    console.log(classAvg.sort((a, b) => b - a)[0]); // 3. 반 1등
+    classAvg = [];
+}
+
+console.log(totalAvg); // 2. 반평균
+console.log(parseInt(totalAvg.reduce((a, b) => a + b) / 7)); // 4. 전체 평균
